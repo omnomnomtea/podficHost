@@ -6,7 +6,12 @@ const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
     unique: true,
-    allowNull: false
+    allowNull: false,
+  },
+  username: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false,
   },
   password: {
     type: Sequelize.STRING
@@ -14,9 +19,24 @@ const User = db.define('user', {
   salt: {
     type: Sequelize.STRING
   },
-  googleId: {
-    type: Sequelize.STRING
-  }
+  banned: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  emailVerified: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  bio: {
+    type: Sequelize.TEXT,
+  },
+  image: {
+    type: Sequelize.TEXT
+  },
+  admin: {
+    type: Sequelize.ENUM('user', 'admin', 'owner'),
+    defaultValue: 'user',
+  },
 })
 
 module.exports = User
