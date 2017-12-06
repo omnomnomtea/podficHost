@@ -13,10 +13,6 @@ const Audio = require('./audio')
  *    BlogPost.belongsTo(User)
  */
 
-// tags may be fandom specific (or may be general)
-Tag.belongsToMany(Fandom, {through: 'tagFandom'})
-Fandom.belongsToMany(Tag, {through: 'tagFandom'})
-
 // characters belong to one or more fandoms
 Character.belongsToMany(Fandom, {through: 'characterFandom'})
 Fandom.belongsToMany(Character, {through: 'characterFandom'})
