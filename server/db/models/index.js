@@ -4,6 +4,7 @@ const Character = require('./character')
 const Pairing = require('./pairing')
 const Podfic = require('./podfic')
 const Tag = require('./tag')
+const Audio = require('./audio')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -29,14 +30,21 @@ Podfic.belongsToMany(Character, {through: 'podficCharacter'})
 Podfic.belongsToMany(Pairing, {through: 'podficPairing'})
 Podfic.belongsToMany(Tag, {through: 'podficTag'})
 
+// Podfics can have multiple files of various formats
+// But each file belongs to only one podfic
+Podfic.hasMany(Audio)
+Audio.belongsTo(Podfic)
+
 // authorship
+// Podfics can have more than one reader
+// Readers can have more than one podfic
 Podfic.belongsToMany(User, {through: 'userPodfics'})
 User.belongsToMany(Podfic, {through: 'userPodfic'})
 
 // Users can belong to wrangling groups for fandoms
 User.belongsToMany(Fandom, {through: 'wranglingPrivs'})
 
-// // Users can subscribe to fandoms, podfics, pairings, or characters
+// // Users can subscribe to fandoms, podfics, pairings, or characters (FOR LATER)
 // User.belongsToMany(Fandom, {through: 'fandomSubscriptions'})
 // User.belongsToMany(Podfic, {through: 'podficSubscriptions'})
 // User.belongsToMany(Pairing, {through: 'pairingSubscriptions'})

@@ -12,21 +12,19 @@ const Podfic = db.define('podfic', {
   image: {
     type: Sequelize.STRING,
   },
-  audioURL: {
+  draft: { //if true, this is a draft and others shouldn't see it
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  textAuthor: {
     type: Sequelize.STRING,
-    allowNull: false,
+  },
+  textAuthorUrl: {
+    type: Sequelize.STRING,
   },
   textUrl: {
     type: Sequelize.STRING,
   },
-  draft: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false,
-  },
-  originalUrl: {
-    type: Sequelize.STRING,
-  },
-
 })
 
 module.exports = Podfic
