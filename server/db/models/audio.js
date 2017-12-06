@@ -9,6 +9,9 @@ const Audio = db.define('audio', {
   notes: {
     type: Sequelize.TEXT,
   },
+  fileType: {
+    type: Sequelize.ENUM('mp3', 'm4a/m4b', 'wav')
+  },
   audioUrl: {
     type: Sequelize.STRING,
     unique: true,
