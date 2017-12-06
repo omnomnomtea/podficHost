@@ -29,6 +29,7 @@ Character.belongsToMany(Pairing, {through: 'characterPairing'})
 Podfic.belongsToMany(Character, {through: 'podficCharacter'})
 Podfic.belongsToMany(Pairing, {through: 'podficPairing'})
 Podfic.belongsToMany(Tag, {through: 'podficTag'})
+Tag.belongsToMany(Podfic, {through: 'podficTag'})
 
 // Podfics can have multiple files of various formats
 // But each file belongs to only one podfic
