@@ -10,7 +10,7 @@
  * Now that you've got the main idea, check it out in practice below!
  */
 const db = require('../server/db')
-const {User, Fandom, Tag, Audio, Podfic} = require('../server/db/models')
+const {User, Fandom, Tag, Audio, Podfic, Character} = require('../server/db/models')
 
 async function seed () {
   await db.sync({force: true})
@@ -34,6 +34,26 @@ async function seed () {
   // Harry Potter subfandoms should have "Harry Potter (All)"" as a parent fandom
   await fandoms[0].addParent(fandoms[2])
   await fandoms[1].addParent(fandoms[2])
+
+  const characters = await Promise.all([
+    Character.create({name: 'Harry Potter'}),
+    Character.create({name: 'Hermione Granger'}),
+    Character.create({name: 'Ron Weasley'}),
+    Character.create({name: 'Dave Strider'}),
+    Character.create({name: 'John Egbert'}),
+    Character.create({name: 'Karkat Vantas'}),
+  ])
+
+  await characters[0].addFandoms(fandoms.slice(0, 3)) //add all the Harry Potter fandoms to the HP chars
+  await characters[1].addFandoms(fandoms.slice(0, 3)) //add all the Harry Potter fandoms to the HP chars
+  await characters[2].addFandoms(fandoms.slice(0, 3)) //add all the Harry Potter fandoms to the HP chars
+
+  // Homestuck chars
+  await characters[3].addFandom(fandoms[3])
+  await characters[4].addFandom(fandoms[3])
+  await characters[5].addFandom(fandoms[3])
+
+
 
   const tags = await Promise.all([
     Tag.create({name: 'hurt/comfort'}),
@@ -69,6 +89,8 @@ async function seed () {
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${fandoms.length} fandoms`)
   console.log(`seeded ${tags.length} tags`)
+  console.log(`seeded ${audioFiles.length} audio files (urls are totes fake though so nothing will play)`)
+  console.log(`seeded ${podfics.length} podfics`)
   console.log(`seeded successfully`)
 }
 
