@@ -16,4 +16,4 @@ const Audio = db.define('audio', {
   }
 })
 
-module.exports = Podfic
+module.exports = Audio
