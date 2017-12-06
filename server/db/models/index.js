@@ -27,6 +27,8 @@ Podfic.belongsToMany(Pairing, {through: 'podficPairing'})
 Podfic.belongsToMany(Tag, {through: 'podficTag'})
 Tag.belongsToMany(Podfic, {through: 'podficTag'})
 
+Audio.belongsTo(User)
+
 // Podfics can have multiple files of various formats
 // But each file belongs to only one podfic
 Podfic.hasMany(Audio)
@@ -35,7 +37,7 @@ Audio.belongsTo(Podfic)
 // authorship
 // Podfics can have more than one reader
 // Readers can have more than one podfic
-Podfic.belongsToMany(User, {through: 'userPodfics'})
+Podfic.belongsToMany(User, {through: 'userPodfic'})
 User.belongsToMany(Podfic, {through: 'userPodfic'})
 
 // Users can belong to wrangling groups for fandoms
@@ -64,4 +66,5 @@ module.exports = {
   Pairing,
   Podfic,
   Tag,
+  Audio
 }
