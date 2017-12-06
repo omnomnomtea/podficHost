@@ -3,7 +3,16 @@ const User = require('../db/models/user')
 module.exports = router
 
 router.post('/login', (req, res, next) => {
-  User.findOne({where: {email: req.body.email}})
+
+  let userPromise;
+  if (req.body.emailOrName.indexOf('@') !== -1){ // if this is an email
+    userPromise = User.findOne({where: {email: req.body.emailOrName}})
+  }
+  else { // this is their username
+    userPromise = User.findOne({where: {username: req.body.emailOrName}})
+  }
+
+  userPromise
     .then(user => {
       if (!user) {
         res.status(401).send('User not found')
