@@ -31,9 +31,7 @@ const Main = (props) => {
             </span>
         }
       </nav>
-      <div className="">
         {children}
-      </div>
     </div>
   )
 }
