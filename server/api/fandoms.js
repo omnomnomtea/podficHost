@@ -14,7 +14,7 @@ router.get('/:id/podfics', (req, res, next) => {
     .then(fandom => {
       return fandom.getPodfics()
     })
-    .then(fandoms => res.json(fandoms))
+    .then(podfics => res.json(podfics))
     .catch(next)
 })
 
