@@ -12,7 +12,7 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
-router.post('/', (req, res, next)=> {
+router.post('/', (req, res, next) => {
   Podfic.create(req.data)
   .then(podfic => res.json(podfic))
   .catch(next)
