@@ -43,7 +43,6 @@ router.get('/:id', (req, res, next) => {
     where: {id},
     include:
      [
-       Audio,
        Pairing,
        Character,
        Fandom,

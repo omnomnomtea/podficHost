@@ -24,14 +24,6 @@ const SinglePodfic = (props) => {
       <div className="podfic-description">
         <strong>Description: </strong>
         {podfic.description}
-        {
-          podfic.audios.map(audio => (
-            <div key={audio.id}>
-              {audio.title} ({audio.fileType})
-              <button className="download-button" onClick={() => handleDownload(audio)}>download</button>
-            </div>
-          ))
-        }
       </div>
     </div>
   )
