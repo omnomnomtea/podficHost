@@ -24,6 +24,14 @@ router.get('/recent/:numToFetch/after/:after', (req, res, next) => {
     ],
     limit: numToFetch,
     offset: after,
+    include: [
+      Audio,
+      Pairing,
+      Character,
+      Fandom,
+      {model: User, through: 'userPodfic', attributes: ['username', 'id']}
+
+    ]
   })
     .then(podfics => res.json(podfics))
     .catch(next)
