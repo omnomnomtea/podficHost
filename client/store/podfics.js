@@ -11,7 +11,6 @@ const CLEAR_PODFICS = 'CLEAR_PODFICS'
  * INITIAL STATE
  */
 const defaultPodfics = []
-const defautPodfic = {}
 
 /**
  * ACTION CREATORS
