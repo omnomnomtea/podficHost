@@ -119,13 +119,10 @@ async function seed () {
   await podfics[3].addAudio(audioFiles[4])
   await podfics[3].addUser(audioFiles[4].userId)
 
-
-
-  // Wowzers! We can even `await` on the right-hand side of the assignment operator
-  // and store the result that the promise resolves to in a variable! This is nice!
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${fandoms.length} fandoms`)
   console.log(`seeded ${tags.length} tags`)
+  console.log(`seeded ${characters.length} characters`)
   console.log(`seeded ${audioFiles.length} audio files (urls are totes fake though so nothing will play)`)
   console.log(`seeded ${podfics.length} podfics`)
   console.log(`seeded successfully`)
