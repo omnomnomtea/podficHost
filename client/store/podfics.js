@@ -26,7 +26,7 @@ export const fetchPodfic = (id) =>
   dispatch =>
     axios.get(`/api/podfics/${id}`)
       .then(res => {
-        if (res.data) dispatch(getPodfic(rest.data))
+        if (res.data) dispatch(getPodfic(res.data))
       })
       .catch(err => console.log(err))
 
