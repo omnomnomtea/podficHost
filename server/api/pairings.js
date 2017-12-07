@@ -3,11 +3,7 @@ const {Pairing} = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
-  Pairing.findAll({
-    // explicitly select only the id and email fields - even though
-    // users' passwords are encrypted, it won't help if we just
-    // send everything to anyone who asks!
-  })
+  Pairing.findAll({})
     .then(pairings => res.json(pairings))
     .catch(next)
 })
