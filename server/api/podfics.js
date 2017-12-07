@@ -3,11 +3,7 @@ const {Podfic, Audio, Character, Fandom, Pairing, User} = require('../db/models'
 module.exports = router
 
 router.get('/', (req, res, next) => {
-  Podfic.findAll({
-    // explicitly select only the id and email fields - even though
-    // users' passwords are encrypted, it won't help if we just
-    // send everything to anyone who asks!
-  })
+  Podfic.findAll({})
     .then(podfics => res.json(podfics))
     .catch(next)
 })
@@ -16,6 +12,21 @@ router.post('/', (req, res, next) => {
   Podfic.create(req.data)
   .then(podfic => res.json(podfic))
   .catch(next)
+})
+
+router.get('/recent/:numToFetch/after/:after', (req, res, next) => {
+  const numToFetch = Number(req.params.numToFetch)
+  const after = Number(req.params.after) || 0;
+
+  Podfic.findAll({
+    order: [
+      ['createdAt', 'DESC']
+    ],
+    limit: numToFetch,
+    offset: after,
+  })
+    .then(podfics => res.json(podfics))
+    .catch(next)
 })
 
 router.get('/:id', (req, res, next) => {
