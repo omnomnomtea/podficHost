@@ -3,7 +3,7 @@ module.exports = router
 
 
 router.use('/users', require('./users'))
-router.use('./podfics', require('./podfics'))
+router.use('/podfics', require('./podfics'))
 router.use('/tags/', require('./tags'))
 router.use('/pairings', require('./pairings'))
 router.use('/characters', require('./characters'))
