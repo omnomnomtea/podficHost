@@ -1,8 +1,8 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import SinglePodfic from './single-podfic'
-import {fetchRecentPodfics} from '../store'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { SinglePodfic, SearchBox } from './index'
+import { fetchRecentPodfics } from '../store'
 
 class MainPage extends React.Component {
   constructor() {
@@ -12,31 +12,34 @@ class MainPage extends React.Component {
     }
   }
 
-  loadOnce () {
+  loadOnce() {
     if (!this.state.loaded) this.props.loadPodfics()
-    this.setState({loaded: true})
+    this.setState({ loaded: true })
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const { podfics } = this.props;
     this.loadOnce()
   }
-  componentWillReceiveProps (newProps) {
+  componentWillReceiveProps(newProps) {
     this.loadOnce()
   }
-  render () {
-    const {podfics} = this.props
+  render() {
+    const { podfics } = this.props
     if (!podfics) return <div className="loading" />
     return (
-    <div className="content">
-      {
-        podfics.map(podfic => {
-          return (
-            <SinglePodfic key={podfic.id} podfic={podfic} />
-          )
-        })
-      }
-    </div>
+      <React.Fragment>
+        <div className="content">
+          {
+            podfics.map(podfic => {
+              return (
+                <SinglePodfic key={podfic.id} podfic={podfic} />
+              )
+            })
+          }
+        </div>
+        <SearchBox />
+      </React.Fragment>
     )
   }
 }
@@ -53,7 +56,7 @@ const mapState = (state, ownProps) => {
 
 const mapDispatch = (dispatch, ownProps) => {
   return {
-    loadPodfics (numPerPage, pageNum) {
+    loadPodfics(numPerPage, pageNum) {
       numPerPage = Number(numPerPage || ownProps.match.params.numPerPage || 20)
       pageNum = Number(pageNum || ownProps.match.params.pageNum || 1)
       console.log('numPerPage', numPerPage)
