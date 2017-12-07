@@ -30,6 +30,15 @@ export const fetchPodfic = (id) =>
       })
       .catch(err => console.log(err))
 
+
+export const fetchRecentPodfics = (numToFetch, after = 0) =>
+dispatch =>
+  axios.get(`/api/podfics/recent/${numToFetch}/after/${after}`)
+    .then(res => {
+      if (res.data) dispatch(getManyPodfics(res.data))
+    })
+    .catch(err => console.log(err))
+
 export const fetchPodficsByFandom = (fandomId) =>
   dispatch =>
     axios.get(`/api/fandoms/${fandomId}/podfics`)
