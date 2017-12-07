@@ -24,6 +24,9 @@ Character.belongsToMany(Pairing, {through: 'characterPairing'})
 // Podfics have characters, pairings, and tags
 Podfic.belongsToMany(Character, {through: 'podficCharacter'})
 Podfic.belongsToMany(Pairing, {through: 'podficPairing'})
+Podfic.belongsToMany(Fandom, {through: 'podficFandom'})
+Fandom.belongsToMany(Podfic, {through: 'podficFandom'})
+
 Podfic.belongsToMany(Tag, {through: 'podficTag'})
 Tag.belongsToMany(Podfic, {through: 'podficTag'})
 
