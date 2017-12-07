@@ -14,7 +14,17 @@ router.get('/:id/podfics', (req, res, next) => {
     .then(character => {
       return character.getPodfics()
     })
-    .then(characters => res.json(characters))
+    .then(podfics => res.json(podfics))
+    .catch(next)
+})
+
+router.get('/:id/pairings', (req, res, next) => {
+  const id = Number(req.params.id)
+  Character.findById(id)
+    .then(character => {
+      return character.getPairings()
+    })
+    .then(pairings => res.json(pairings))
     .catch(next)
 })
 
