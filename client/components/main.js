@@ -14,25 +14,26 @@ const Main = (props) => {
   const {children, handleClick, isLoggedIn} = props
 
   return (
-    <div>
+    <div className="container grid">
+    <nav>
       <h1>Podfic Hosting Site</h1>
-      <nav>
         {
           isLoggedIn
-            ? <div>
+            ? <span>
               {/* The navbar will show these links after you log in */}
               <Link to="/home">Home</Link>
               <a href="#" onClick={handleClick}>Logout</a>
-            </div>
-            : <div>
+            </span>
+            : <span>
               {/* The navbar will show these links before you log in */}
               <Link to="/login">Login</Link>
               <Link to="/signup">Sign Up</Link>
-            </div>
+            </span>
         }
       </nav>
-      <hr />
-      {children}
+      <div className="">
+        {children}
+      </div>
     </div>
   )
 }

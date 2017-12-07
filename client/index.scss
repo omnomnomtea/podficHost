@@ -1,3 +1,5 @@
+@import './_variables';
+
 body {
   font-family: sans-serif;
 
@@ -9,9 +11,20 @@ body {
     display: block;
   }
 
-  nav a {
-    display: inline-block;
-    margin: 1em;
+  nav {
+    color: $text-color-light;
+    background: white;
+    outline: solid $text-color-dark 2px;
+
+    a {
+      display: inline-block;
+      margin: 1em;
+    }
+
+    h1 {
+      display: inline-block;
+    }
+
   }
 
   form div {
@@ -19,3 +32,54 @@ body {
     display: inline-block;
   }
 }
+
+.grid {
+  display: grid;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 75% 25%;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "header header"
+    "content search"
+    "footer footer";
+}
+
+nav {
+  grid-area: header;
+}
+
+.content {
+  grid-area: content;
+}
+
+.single-podfic-container {
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  grid-template-rows: auto;
+
+  grid-template-areas:
+    "title title ."
+    "podimage tags tags"
+    "podimage description description";
+
+  margin: 5px;
+  background-color: $background-color-light;
+}
+
+.search-container {
+  background: $background-color-dark;
+}
+
+.podfic-image {
+  grid-area: podimage;
+}
+.podfic-title {
+  grid-area: title;
+}
+.podfic-description {
+  grid-area: description;
+}
+

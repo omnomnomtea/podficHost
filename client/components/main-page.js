@@ -28,7 +28,7 @@ class MainPage extends React.Component {
     const {podfics} = this.props
     if (!podfics) return <div className="loading" />
     return (
-    <div>
+    <div className="content">
       {
         podfics.map(podfic => {
           return (

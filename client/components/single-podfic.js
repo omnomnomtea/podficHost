@@ -11,25 +11,28 @@ const SinglePodfic = (props) => {
   const { podfic } = props
   if (!podfic) return <div className="loading" />
   return (
-    <div className="single-podfic">
-      <Link to={`/podfics/${podfic.id}`}>{podfic.title}</Link> <strong>by</strong> <span className="podfic-authors">
-        {podfic.users.map(user => user.username).join(', ') || 'Orphan Account'}
-      </span>
-      <div className="podfic-image">
-        <img src={podfic.image || 'http://via.placeholder.com/200x200'} />
+    <div className="single-podfic-container">
+      <div className="podfic-title">
+        <Link to={`/podfics/${podfic.id}`}>{podfic.title}</Link>
+        <strong> by </strong> <span className="podfic-authors">
+          {podfic.users.map(user => user.username).join(', ') || 'Orphan Account'}
+        </span>
       </div>
-      <div className="description">
+      <div className="podfic-image">
+        <img src={podfic.image || 'http://via.placeholder.com/175x175'} />
+      </div>
+      <div className="podfic-description">
         <strong>Description: </strong>
         {podfic.description}
-      </div>
-      {
-        podfic.audios.map(audio => (
-          <div key={audio.id}>
-            {audio.title} ({audio.fileType})
+        {
+          podfic.audios.map(audio => (
+            <div key={audio.id}>
+              {audio.title} ({audio.fileType})
               <button className="download-button" onClick={() => handleDownload(audio)}>download</button>
-          </div>
-        ))
-      }
+            </div>
+          ))
+        }
+      </div>
     </div>
   )
 }
