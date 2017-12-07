@@ -1,30 +1,30 @@
 const router = require('express').Router()
-const {Tag, Podfic} = require('../db/models')
+const {Pairing, Podfic} = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
-  Tag.findAll({
+  Pairing.findAll({
     // explicitly select only the id and email fields - even though
     // users' passwords are encrypted, it won't help if we just
     // send everything to anyone who asks!
   })
-    .then(tags => res.json(tags))
+    .then(pairings => res.json(pairings))
     .catch(next)
 })
 
 router.get('/:id/podfics', (req, res, next) => {
   const id = Number(req.params.id)
-  Tag.findById(id)
-    .then(tag => {
-      return tag.getPodfics()
+  Pairing.findById(id)
+    .then(pairing => {
+      return pairing.getPodfics()
     })
-    .then(tags => res.json(tags))
+    .then(pairings => res.json(pairings))
     .catch(next)
 })
 
 router.get('/:id', (req, res, next) => {
   const id = Number(req.params.id)
-  Tag.findById(id)
-    .then(tag => res.json(tag))
+  Pairing.findById(id)
+    .then(pairing => res.json(pairing))
     .catch(next)
 })
