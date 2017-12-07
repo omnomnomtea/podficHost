@@ -81,12 +81,14 @@ export const postNewPodfic = (podfic) =>
 /**
  * REDUCER
  */
-export default function (state = defaultUser, action) {
+export default function (state = defaultPodfics, action) {
   switch (action.type) {
-    case GET_USER:
-      return action.user
-    case REMOVE_USER:
-      return defaultUser
+    case GET_PODFIC:
+      return [...state, action.podfic]
+    case CLEAR_PODFICS:
+      return defaultPodfics
+    case GET_MANY_PODFICS:
+      return action.podfics //note that this discards the current state
     default:
       return state
   }
