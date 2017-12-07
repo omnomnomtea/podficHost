@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Pairing, Podfic} = require('../db/models')
+const {Pairing} = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -18,7 +18,7 @@ router.get('/:id/podfics', (req, res, next) => {
     .then(pairing => {
       return pairing.getPodfics()
     })
-    .then(pairings => res.json(pairings))
+    .then(podfics => res.json(podfics))
     .catch(next)
 })
 
