@@ -81,8 +81,14 @@ async function seed () {
 
   podfics.forEach(async (podfic) => {
     await podfic.addUser(users[0])
+    await podfic.addTag(tags[0])
+    await podfic.addFandoms([fandoms[0], fandoms[2]])
   })
   await podfics[2].addUser(users[2])
+  await podfics[1].addTag(tags[1])
+  await podfics[1].addTag(tags[2])
+  await podfics[0].addFandom(fandoms[3])
+
 
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
   // and store the result that the promise resolves to in a variable! This is nice!
