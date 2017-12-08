@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SinglePodfic, SearchBox } from './index'
-import { fetchRecentPodfics } from '../store'
+import { fetchRecentPodfics, clearPodfics } from '../store'
 
 class MainPage extends React.Component {
   constructor() {
@@ -18,9 +18,12 @@ class MainPage extends React.Component {
   }
 
   componentDidMount() {
-    const { podfics } = this.props;
     this.loadOnce()
   }
+  componentWillUnmount() {
+    this.props.clearPodfics()
+  }
+
   componentWillReceiveProps(newProps) {
     this.loadOnce()
   }
@@ -65,7 +68,8 @@ const mapDispatch = (dispatch, ownProps) => {
       console.log('pageNum', pageNum)
 
       dispatch(fetchRecentPodfics(numPerPage, (pageNum - 1) * numPerPage))
-    }
+    },
+    clearPodfics: () => {clearPodfics()}
   }
 }
 
