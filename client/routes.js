@@ -9,7 +9,7 @@ import {
   Login,
   Signup,
   UserHome,
-  SinglePodfic,
+  SinglePodficPage,
   MainPage
 } from './components'
 import { me } from './store'
@@ -34,7 +34,7 @@ class Routes extends Component {
             <Route exact path="/recent/:numPerPage/page/:pageNum" component={MainPage} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route exact path="/podfics/:id" component={SinglePodfic} />
+            <Route exact path="/podfics/:id" component={SinglePodficPage} />
             {
               isLoggedIn &&
               <Switch>
