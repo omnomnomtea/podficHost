@@ -25,7 +25,6 @@ router.get('/recent/:numToFetch/after/:after', (req, res, next) => {
     limit: numToFetch,
     offset: after,
     include: [
-      Audio,
       Pairing,
       Character,
       Fandom,
@@ -43,6 +42,7 @@ router.get('/:id', (req, res, next) => {
     where: {id},
     include:
      [
+       Audio,
        Pairing,
        Character,
        Fandom,
