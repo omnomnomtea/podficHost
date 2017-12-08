@@ -12,13 +12,18 @@ body {
   }
 
   nav {
-    color: $text-color-light;
+    color: $text-color-dark;
     background: white;
-    outline: solid $text-color-dark 2px;
 
-    a {
-      display: inline-block;
-      margin: 1em;
+    .nav-links {
+      background: $background-color-darker;
+      color: white;
+
+      a {
+        display: inline-block;
+        margin: 1em;
+        color: white;
+      }
     }
 
     h1 {
@@ -75,25 +80,34 @@ nav {
     "podimage title title"
     "podimage tags tags"
     "podimage description description";
-  background-color: $background-color-light;
+  background: white;
+  outline: solid $background-color-neutral-light 1px;
   margin-top: 15px;
-  margin-left: 10px;
   align-items: start;
 }
 
 .search-container {
   grid-area: searchbox;
   height: 300px;
-  background: $background-color-dark;
+  background: $background-color-medium;
+  outline: solid $text-color-dark 1px;
   margin-top: 15px;
   margin-right: 15px;
 }
 
 .podfic-image {
   grid-area: podimage;
+  margin: 5px;
 }
 .podfic-title {
   grid-area: title;
+
+  a:visited {
+    color: $text-color-neutral;
+  }
+  a:link {
+    color: $text-color-medium;
+  }
 
   h3 {
     display: inline;
