@@ -14,7 +14,7 @@ const Main = (props) => {
   const {children, handleClick, isLoggedIn} = props
 
   return (
-    <div className="container grid">
+    <div className="container">
     <nav>
       <h1>Podfic Hosting Site</h1>
         {

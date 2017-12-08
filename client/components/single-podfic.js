@@ -2,10 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-// helper functions
-const handleDownload = (audio) => {
-  window.open(audio.audioUrl)
-}
 // main function
 const SinglePodfic = (props) => {
   const { podfic } = props
@@ -13,9 +9,9 @@ const SinglePodfic = (props) => {
   return (
     <div className="single-podfic-container">
       <div className="podfic-title">
-        <Link to={`/podfics/${podfic.id}`}>{podfic.title}</Link>
-        <strong> by </strong> <span className="podfic-authors">
-          {podfic.users.map(user => user.username).join(', ') || 'Orphan Account'}
+        <h3><Link to={`/podfics/${podfic.id}`}>{podfic.title}</Link> </h3>
+        <span className="podfic-authors">
+          by {podfic.users.map(user => user.username).join(', ') || 'Orphan Account'}
         </span>
       </div>
       <div className="podfic-image">
@@ -40,7 +36,7 @@ const mapState = (state, ownProps) => {
 }
 
 
-const mapDispatch = (dispatch, ownProps) => {
+const mapDispatch = () => {
   return {}
 }
 

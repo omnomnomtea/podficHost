@@ -29,16 +29,18 @@ class MainPage extends React.Component {
     if (!podfics) return <div className="loading" />
     return (
       <React.Fragment>
-        <div className="content">
-          {
-            podfics.map(podfic => {
-              return (
-                <SinglePodfic key={podfic.id} podfic={podfic} />
-              )
-            })
-          }
+        <div className="main">
+          <div className="content">
+            {
+              podfics.map(podfic => {
+                return (
+                  <SinglePodfic key={podfic.id} podfic={podfic} />
+                )
+              })
+            }
+            </div>
+          <SearchBox />
         </div>
-        <SearchBox />
       </React.Fragment>
     )
   }
