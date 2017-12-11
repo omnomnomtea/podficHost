@@ -5,9 +5,11 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 import user from './user'
 import podfics from './podfics'
+import users from './users'
 
 const reducer = combineReducers({
   user,
+  users,
   podfics
 })
 const middleware = composeWithDevTools(applyMiddleware(
@@ -19,3 +21,4 @@ const store = createStore(reducer, middleware)
 export default store
 export * from './user'
 export * from './podfics'
+export * from './users'
