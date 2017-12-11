@@ -9,6 +9,7 @@ class SinglePodficPage extends React.Component {
     this.state = {
       loaded: false
     }
+    this.handleDownload = this.handleDownload.bind(this)
   }
   loadOnce() {
     if (!this.state.loaded ) this.props.loadPodfic()
