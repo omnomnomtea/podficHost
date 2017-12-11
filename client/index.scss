@@ -102,10 +102,6 @@ nav {
   outline: solid $text-color-dark 1px;
 }
 
-.audiofile-area {
-  grid-area: sidecontent;
-  background: red;
-}
 
 .podfic-image {
   grid-area: podimage;
@@ -139,4 +135,39 @@ nav {
   grid-area: tags;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+
+
+
+.audiofile-area {
+  grid-area: sidecontent;
+  background: $background-color-medium;
+  outline: solid $text-color-dark 1px;
+  padding: 10px;
+}
+
+.single-audio-download {
+  padding-bottom: 20px;
+  text-align: right;
+  color: $text-color-dark;
+
+  h4 {
+    text-align: left;
+    margin: 0px;
+  }
+
+  p {
+    width: 100%;
+    margin: 0px;
+  }
+
+  button {
+    color: $text-color-dark;
+    background: white;
+    border-radius: 2px;
+    display: block;
+    width: 100%;
+    padding: 5px;
+  }
 }
