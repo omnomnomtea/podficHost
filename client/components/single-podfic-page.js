@@ -18,7 +18,7 @@ class SinglePodficPage extends React.Component {
 
   handleDownload(audio) {
     // NOTE: later, add to the download count
-    window.open(audio, '_blank');
+    window.open(audio.audioUrl, '_blank');
   }
 
   componentDidMount() {
