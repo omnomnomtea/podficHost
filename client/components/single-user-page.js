@@ -11,17 +11,33 @@ class SingleUserPage extends React.Component {
     }
   }
 
-  loadOnce() {
-    if (!this.state.loaded ) this.props.load()
-    this.setState({ loaded: true })
+  loadOnce(force) {
+    if (!this.state.loaded || force) {
+      this.props.load()
+      this.setState({ loaded: true })
+    }
   }
+
 
   componentDidMount() {
     this.loadOnce()
   }
 
+  componentWillReceiveProps(newProps) {
+    if (newProps.userId !== this.props.userId) {
+      this.setState({loaded: false})
+    }
+    this.loadOnce()
+  }
+
   componentWillUnmount() {
     this.props.clear()
+  }
+
+  componentDidUpdate(newProps, oldState) {
+    if (!this.state.loaded) {
+      this.loadOnce(true) //force data to reload
+    }
   }
 
   render() {
@@ -35,6 +51,7 @@ class SingleUserPage extends React.Component {
           {user.bio}
         </div>
         <div className="user-podfics">
+        <h3>Podfics:</h3>
           {
             podfics.map(podfic => {
               return <SinglePodfic key={podfic.id} podfic={podfic} />
@@ -59,7 +76,8 @@ const mapState = (state, ownProps) => {
     podfics: state.podfics.filter(podfic =>
       !!podfic.users.find(user => user.id === userId) //if not found, returns undefined (falsey) and filters out this podfic from state
     ),
-    user: state.users.find(user => user.id === userId)
+    user: state.users.find(user => user.id === userId),
+    userId,
   }
 }
 
