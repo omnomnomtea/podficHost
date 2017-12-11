@@ -10,6 +10,7 @@ import {
   Signup,
   UserHome,
   SinglePodficPage,
+  SingleUserPage,
   MainPage
 } from './components'
 import { me } from './store'
@@ -35,6 +36,7 @@ class Routes extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/podfics/:id" component={SinglePodficPage} />
+            <Route exact path="/users/:id" component={SingleUserPage} />
             {
               isLoggedIn &&
               <Switch>
