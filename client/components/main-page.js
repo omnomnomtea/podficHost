@@ -21,6 +21,7 @@ class MainPage extends React.Component {
     this.loadOnce()
   }
   componentWillUnmount() {
+    console.log('unmounted main-page')
     this.props.clearPodfics()
   }
 
@@ -69,7 +70,7 @@ const mapDispatch = (dispatch, ownProps) => {
 
       dispatch(fetchRecentPodfics(numPerPage, (pageNum - 1) * numPerPage))
     },
-    clearPodfics: () => {clearPodfics()}
+    clearPodfics: () => {dispatch(clearPodfics())}
   }
 }
 
