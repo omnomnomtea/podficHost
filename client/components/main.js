@@ -16,7 +16,7 @@ const Main = (props) => {
   return (
     <div className="container">
     <nav>
-      <h1>Podfic Hosting Site</h1>
+      <h1><Link to="/">Podfic Hosting Site</Link></h1>
         {
           isLoggedIn
             ? <div className="nav-links">
