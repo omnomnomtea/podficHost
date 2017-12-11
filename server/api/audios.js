@@ -8,9 +8,18 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
+
+router.get('/:id/downloaded', (req, res, next) => {
+  const id = Number(req.params.id)
+  Audio.findById(id)
+    .then(audio => Audio.incrementDownloadCount(audio))
+    .then(() => res.send(204))
+    .catch(next)
+})
+
 router.get('/:id', (req, res, next) => {
   const id = Number(req.params.id)
   Audio.findById(id)
-    .then(pairing => res.json(pairing))
+    .then(audio => res.json(audio))
     .catch(next)
 })
