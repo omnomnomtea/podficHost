@@ -11,27 +11,28 @@ class SinglePodficPage extends React.Component {
     }
   }
   loadOnce() {
-    if (!this.state.loaded) this.props.loadPodfic()
+    if (!this.state.loaded ) this.props.loadPodfic()
     this.setState({ loaded: true })
   }
 
   handleDownload(audio) {
-    // NOTE: later, add to download count
+    // NOTE: later, add to the download count
     window.open(audio, '_blank');
   }
 
   componentDidMount() {
     this.loadOnce()
   }
-  componentWillReceiveProps() {
-    this.loadOnce()
-  }
+
   render() {
     const { podfic } = this.props
-    if (!podfic) return <div className="loading" />
+    if (!podfic || !podfic.audios) return <div className="loading" />
     return (
       <div className="main">
-        <SinglePodfic podfic={podfic} />
+        <div className="content">
+          <SinglePodfic podfic={podfic} />
+        </div>
+        <div className="audiofile-area">
         {
           podfic.audios.map(audio => (
             <div key={audio.id}>
@@ -40,6 +41,7 @@ class SinglePodficPage extends React.Component {
             </div>
           ))
         }
+        </div>
       </div>
     )
   }
@@ -58,9 +60,9 @@ const mapState = (state, ownProps) => {
 
 const mapDispatch = (dispatch, ownProps) => {
   const id = Number(ownProps.match.params.id)
-  console.log('id:', id)
   return {
     loadPodfic() {
+      console.log('loading podfic')
       dispatch(fetchPodfic(id))
     }
   }
