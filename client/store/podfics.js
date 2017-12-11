@@ -94,7 +94,7 @@ export default function (state = defaultPodfics, action) {
     case GET_PODFIC:
       return [...state, action.podfic]
     case CLEAR_PODFICS:
-      return defaultPodfics
+      return []
     case GET_MANY_PODFICS:
       return action.podfics //note that this discards the current state
     default:
