@@ -1,15 +1,17 @@
 const router = require('express').Router()
-const {User} = require('../db/models')
+const { User, Tag, Pairing, Fandom, Character } = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
-  User.findAll({
-    // explicitly select only the id and email fields - even though
-    // users' passwords are encrypted, it won't help if we just
-    // send everything to anyone who asks!
-    attributes: ['id', 'username', 'image', 'bio']
-  })
+  User.findAll({})
     .then(users => res.json(users))
+    .catch(next)
+})
+
+router.get('/:id', (req, res, next) => {
+  const id = Number(req.params.id)
+  User.findById(id)
+    .then(user => res.json(user))
     .catch(next)
 })
 
@@ -17,7 +19,15 @@ router.get('/:id/podfics', (req, res, next) => {
   const id = Number(req.params.id)
   User.findById(id)
     .then(user => {
-      return user.getPodfics()
+      return user.getPodfics({
+        include: [
+          User,
+          Tag,
+          Pairing,
+          Fandom,
+          Character
+        ]
+      })
     })
     .then(podfics => res.json(podfics))
     .catch(next)

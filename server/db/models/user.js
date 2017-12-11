@@ -37,6 +37,15 @@ const User = db.define('user', {
     type: Sequelize.ENUM('user', 'admin', 'owner'),
     defaultValue: 'user',
   },
+}, {
+  defaultScope: {
+    attributes: [
+      'username',
+      'id',
+      'image',
+      'bio',
+    ]
+  }
 })
 
 module.exports = User
