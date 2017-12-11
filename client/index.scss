@@ -91,7 +91,8 @@ nav {
   background: white;
   outline: solid $background-color-neutral-light 1px;
   align-items: start;
-
+  padding-bottom: 15px;
+  padding-top: 10px;
 }
 
 .search-container {
@@ -133,7 +134,6 @@ nav {
   justify-self: start;
   padding-left: 10px;
   padding-right: 10px;
-
 }
 .podfic-tags {
   grid-area: tags;
