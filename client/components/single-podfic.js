@@ -11,7 +11,9 @@ const SinglePodfic = (props) => {
       <div className="podfic-title">
         <h3><Link to={`/podfics/${podfic.id}`}>{podfic.title}</Link> </h3>
         <span className="podfic-authors">
-          by {podfic.users.map(user => user.username).join(', ') || 'Orphan Account'}
+          by {podfic.users.map(user =>
+            <Link key={user.id} to={`/users/${user.id}`}>{user.username} </Link>
+          )}
         </span>
       </div>
       <div className="podfic-image">
