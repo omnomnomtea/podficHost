@@ -10,6 +10,7 @@ const AudioDownloads = (props) => {
         <div key={audio.id}>
           {audio.title}
               <button className="download-button" onClick={() => props.handleDownload(audio)}>download {audio.fileType}</button>
+              <strong>Downloads: </strong> {audio.downloadCount}
         </div>
       ))
     }
