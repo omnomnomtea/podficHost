@@ -1,7 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import axios from 'axios'
 import {SinglePodfic, AudioDownloads} from './index'
 import { fetchPodfic } from '../store'
+
+//quick helper function
+const incrementDownload = (audioId) => {
+  //hit our downloaded route to keep a count of downloads
+  axios.get(`/api/audios/${audioId}/downloaded`)
+}
 
 class SinglePodficPage extends React.Component {
   constructor() {
@@ -17,8 +24,8 @@ class SinglePodficPage extends React.Component {
   }
 
   handleDownload(audio) {
-    // NOTE: later, add to the download count
-    window.open(audio.audioUrl, '_blank');
+    window.open(audio.audioUrl, '_blank')
+    incrementDownload(audio.id)
   }
 
   componentDidMount() {

@@ -23,8 +23,8 @@ const Audio = db.define('audio', {
   }
 })
 
-Audio.prototype.incrementDownloadCount = (user) => {
-  user.downloadCount++
-  return user.update();
+Audio.incrementDownloadCount = (audio) => {
+  return audio.update({downloadCount: audio.downloadCount+1})
 }
+
 module.exports = Audio
