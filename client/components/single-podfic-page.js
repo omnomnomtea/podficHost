@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import SinglePodfic from './single-podfic'
+import {SinglePodfic, AudioDownloads} from './index'
 import { fetchPodfic } from '../store'
 
 class SinglePodficPage extends React.Component {
@@ -33,14 +33,7 @@ class SinglePodficPage extends React.Component {
           <SinglePodfic podfic={podfic} />
         </div>
         <div className="audiofile-area">
-        {
-          podfic.audios.map(audio => (
-            <div key={audio.id}>
-              {audio.title} ({audio.fileType})
-                <button className="download-button" onClick={() => this.handleDownload(audio)}>download</button>
-            </div>
-          ))
-        }
+          <AudioDownloads audios={podfic.audios} handleDownload={this.handleDownload} />
         </div>
       </div>
     )
