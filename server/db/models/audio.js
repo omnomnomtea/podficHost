@@ -16,7 +16,15 @@ const Audio = db.define('audio', {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false,
+  },
+  downloadCount: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
   }
 })
 
+Audio.prototype.incrementDownloadCount = (user) => {
+  user.downloadCount++
+  return user.update();
+}
 module.exports = Audio
