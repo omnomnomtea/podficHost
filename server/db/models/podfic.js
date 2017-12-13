@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+const sanitizeHtml = require('sanitize-html');
+
 
 const Podfic = db.define('podfic', {
   title: {
@@ -26,5 +28,12 @@ const Podfic = db.define('podfic', {
     type: Sequelize.STRING,
   },
 })
+
+const sanitizeDescriptionHtml = (podfic) => {
+  podfic.description = sanitizeHtml(podfic.description)
+}
+
+Podfic.hook('beforeUpdate', sanitizeDescriptionHtml)
+Podfic.hook('beforeCreate', sanitizeDescriptionHtml)
 
 module.exports = Podfic
