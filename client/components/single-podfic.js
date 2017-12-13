@@ -19,6 +19,14 @@ const SinglePodfic = (props) => {
       <div className="podfic-image">
         <img src={podfic.image || 'http://via.placeholder.com/175x175'} />
       </div>
+      <div className="podfic-fandoms">
+      <strong>Fandoms: </strong>
+      {
+        podfic.fandoms.map(fandom => {
+          return <Link key={fandom.id} to={`/fandoms/${fandom.id}`}>{fandom.name}, </Link>
+        })
+    }
+      </div>
       <div className="podfic-tags">
         <strong>Tags: </strong>
           {

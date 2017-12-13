@@ -86,6 +86,7 @@ nav {
   grid-template-columns: $podfic-art-med 2fr 1fr;
   grid-template-areas:
     "podimage title title"
+    "podimage fandoms fandoms"
     "podimage tags tags"
     "podimage description description";
   background: white;
@@ -127,7 +128,6 @@ nav {
 }
 .podfic-description {
   grid-area: description;
-  justify-self: start;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -136,7 +136,11 @@ nav {
   padding-left: 10px;
   padding-right: 10px;
 }
-
+.podfic-fandoms {
+  grid-area: fandoms;
+  padding-left: 10px;
+  padding-right: 10px;
+}
 
 
 
