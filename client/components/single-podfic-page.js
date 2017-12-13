@@ -64,7 +64,6 @@ const mapDispatch = (dispatch, ownProps) => {
   const id = Number(ownProps.match.params.id)
   return {
     loadPodfic() {
-      console.log('loading podfic')
       dispatch(fetchPodfic(id))
     }
   }
