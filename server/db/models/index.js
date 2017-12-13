@@ -60,6 +60,10 @@ User.belongsToMany(Fandom, {through: 'wranglingPrivs'})
 Fandom.belongsToMany(Fandom, {through: 'parentFandom', as: 'child', foreignKey: 'childId'})
 Fandom.belongsToMany(Fandom, {through: 'parentFandom', as: 'parent', foreignKey: 'parentId'})
 
+
+Tag.belongsToMany(Tag, {through: 'parentTag', as: 'child', foreignKey: 'childId'})
+Tag.belongsToMany(Tag, {through: 'parentTag', as: 'parent', foreignKey: 'parentId'})
+
 /**
  * We'll export all of our models here, so that any time a module needs a model,
  * we can just require it from 'db/models'
