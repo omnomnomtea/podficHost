@@ -19,9 +19,9 @@ const SinglePodfic = (props) => {
       <div className="podfic-image">
         <img src={podfic.image || 'http://via.placeholder.com/175x175'} />
       </div>
-      <div className="podfic-description">
+      <div className="podfic-description" >
         <strong>Summary: </strong>
-        {podfic.description}
+        <div dangerouslySetInnerHTML={ {__html: podfic.description} } />
       </div>
     </div>
   )
