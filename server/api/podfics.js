@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Podfic, Audio, Character, Fandom, Pairing, User} = require('../db/models')
+const {Podfic, Audio, Character, Fandom, Pairing, User, Tag} = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -28,6 +28,7 @@ router.get('/recent/:numToFetch/after/:after', (req, res, next) => {
       Pairing,
       Character,
       Fandom,
+      Tag,
       {model: User, through: 'userPodfic', attributes: ['username', 'id']}
 
     ]
@@ -43,6 +44,7 @@ router.get('/:id', (req, res, next) => {
     include:
      [
        Audio,
+       Tag,
        Pairing,
        Character,
        Fandom,
