@@ -7,7 +7,7 @@ const Pairing = db.define('pairing', {
     unique: true,
     allowNull: false,
   },
-  pairingType: {
+  pairingType: { // romantic vs platonic (/ vs &)
     type: Sequelize.STRING,
     defaultValue: '/',
   },
