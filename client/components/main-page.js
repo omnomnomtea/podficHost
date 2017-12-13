@@ -65,9 +65,6 @@ const mapDispatch = (dispatch, ownProps) => {
     loadPodfics(numPerPage, pageNum) {
       numPerPage = Number(numPerPage || ownProps.match.params.numPerPage || 20)
       pageNum = Number(pageNum || ownProps.match.params.pageNum || 1)
-      console.log('numPerPage', numPerPage)
-      console.log('pageNum', pageNum)
-
       dispatch(fetchRecentPodfics(numPerPage, (pageNum - 1) * numPerPage))
     },
     clearPodfics: () => {dispatch(clearPodfics())}
