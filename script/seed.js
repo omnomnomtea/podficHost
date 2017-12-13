@@ -27,6 +27,8 @@ async function seedFandoms() {
     Fandom.create({name: 'Harry Potter (Movies)', description: 'The movies, not the books'}),
     Fandom.create({name: 'Harry Potter (All)', description: 'Books, movies, everything'}),
     Fandom.create({name: 'Homestuck'}),
+    Fandom.create({name: 'Avengers'}),
+    Fandom.create({name: 'Captain America'}),
   ])
   // Harry Potter subfandoms should have "Harry Potter (All)"" as a parent fandom
   await fandoms[0].addParent(fandoms[2])
@@ -73,6 +75,9 @@ async function seedPodfics() {
     Podfic.create({title: 'My podfic', description: 'I made a podfic of this fic', textUrl: 'fakeurl.com/2'}),
     Podfic.create({title: 'Harry Potter and the Podfic of doom', description: 'Podfics are awesome', textUrl: 'fakeurl.com/1'}),
     Podfic.create({title: 'Harry Potter and the Best Podfic Ever', description: 'It\'s so good!', textUrl: 'fakeurl.com'}),
+    Podfic.create({title: 'Captain America cooks', description: `Everything about baking is exceedingly messy. “Could have gone with a box,” Bucky says when Sam drops an egg on the floor. "Or a bakery."
+
+    “Boxes are for quitters,” Nat says. She is wearing black and a light dusting of flour that goes from her feet to the tip of her nose. It is adorable, and because Sam has a healthy respect for his life, he resolves never to tell her so.`, textUrl: 'http://archiveofourown.org/works/3723265'}),
   ])
   return podfics
 }
@@ -118,6 +123,8 @@ async function seed () {
 
   await podfics[3].addAudio(audioFiles[4])
   await podfics[3].addUser(audioFiles[4].userId)
+
+  await podfics[4].addFandoms(fandoms[5])
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${fandoms.length} fandoms`)
