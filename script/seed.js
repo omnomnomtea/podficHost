@@ -75,9 +75,9 @@ async function seedPodfics() {
     Podfic.create({title: 'My podfic', description: 'I made a podfic of this fic', textUrl: 'fakeurl.com/2'}),
     Podfic.create({title: 'Harry Potter and the Podfic of doom', description: 'Podfics are awesome', textUrl: 'fakeurl.com/1'}),
     Podfic.create({title: 'Harry Potter and the Best Podfic Ever', description: 'It\'s so good!', textUrl: 'fakeurl.com'}),
-    Podfic.create({title: 'Captain America cooks', description: `Everything about baking is exceedingly messy. “Could have gone with a box,” Bucky says when Sam drops an egg on the floor. "Or a bakery."
-
-    “Boxes are for quitters,” Nat says. She is wearing black and a light dusting of flour that goes from her feet to the tip of her nose. It is adorable, and because Sam has a healthy respect for his life, he resolves never to tell her so.`, textUrl: 'http://archiveofourown.org/works/3723265'}),
+    Podfic.create({title: 'Captain America cooks', description: `<p>Everything about baking is exceedingly messy. “Could have gone with a box,” Bucky says when Sam drops an egg on the floor. "Or a bakery."
+    </p>
+    <p>“Boxes are for quitters,” Nat says. She is wearing black and a light dusting of flour that goes from her feet to the tip of her nose. It is adorable, and because Sam has a healthy respect for his life, he resolves never to tell her so.</p>`, textUrl: 'http://archiveofourown.org/works/3723265'}),
   ])
   return podfics
 }
