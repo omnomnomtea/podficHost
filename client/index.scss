@@ -94,6 +94,13 @@ nav {
   align-items: start;
   padding-bottom: 15px;
   padding-top: 10px;
+
+  a:visited {
+    color: $contrast-rose-dark;
+  }
+  a:link {
+    color: $contrast-rose;
+  }
 }
 
 .search-container {
@@ -114,12 +121,6 @@ nav {
   padding-left: 10px;
   padding-right: 10px;
 
-  a:visited {
-    color: $text-color-neutral;
-  }
-  a:link {
-    color: $text-color-medium;
-  }
 
   h3 {
     display: inline;
