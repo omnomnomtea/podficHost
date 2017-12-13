@@ -5,6 +5,7 @@ const Pairing = require('./pairing')
 const Podfic = require('./podfic')
 const Tag = require('./tag')
 const Audio = require('./audio')
+const db = require('../db')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -71,6 +72,7 @@ Tag.belongsToMany(Tag, {through: 'parentTag', as: 'parent', foreignKey: 'parentI
  * instead of: const User = require('../db/models/user')
  */
 module.exports = {
+  db,
   User,
   Fandom,
   Character,
