@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import axios from 'axios'
-import {SinglePodfic, AudioDownloads} from './index'
+import {SinglePodfic, AudioDownloads, ExtraInfo} from './index'
 import { fetchPodfic } from '../store'
 
 //quick helper function
@@ -39,6 +39,7 @@ class SinglePodficPage extends React.Component {
       <div className="main">
         <div className="content">
           <SinglePodfic podfic={podfic} />
+          <ExtraInfo podfic={podfic} />
         </div>
         <div className="audiofile-area">
           <AudioDownloads audios={podfic.audios} handleDownload={this.handleDownload} />
