@@ -10,7 +10,7 @@
  * Now that you've got the main idea, check it out in practice below!
  */
 const db = require('../server/db')
-const {User, Fandom, Tag, Audio, Podfic, Character} = require('../server/db/models')
+const {User, Fandom, Tag, Audio, Podfic, Character, Pairing} = require('../server/db/models')
 
 async function seedUsers() {
   const users = await Promise.all([
@@ -38,14 +38,34 @@ async function seedFandoms() {
 
 async function seedCharacters() {
   const characters = await Promise.all([
-    Character.create({name: 'Harry Potter'}),
-    Character.create({name: 'Hermione Granger'}),
-    Character.create({name: 'Ron Weasley'}),
-    Character.create({name: 'Dave Strider'}),
-    Character.create({name: 'John Egbert'}),
-    Character.create({name: 'Karkat Vantas'}),
+    Character.create({name: 'Harry Potter'}), //0
+    Character.create({name: 'Hermione Granger'}), //1
+    Character.create({name: 'Ron Weasley'}), //2
+    Character.create({name: 'Dave Strider'}), //3
+    Character.create({name: 'John Egbert'}), //4
+    Character.create({name: 'Karkat Vantas'}), //5
   ])
   return characters
+}
+
+async function seedPairings(characters){
+  const pairings = await Promise.all([
+    Pairing.create({pairingType: '/', name: 'johnkat'}),
+    Pairing.create({pairingType: '/', name: 'davekat'}),
+    Pairing.create({pairingType: '/', name: 'harry/hermione'})
+  ])
+
+  await pairings[0].addCharacter(characters[4])
+  await pairings[0].addCharacter(characters[5])
+
+  await pairings[1].addCharacter(characters[3])
+  await pairings[1].addCharacter(characters[5])
+
+  await pairings[2].addCharacter(characters[0])
+  await pairings[2].addCharacter(characters[1])
+
+
+  return pairings
 }
 
 async function seedTags() {
@@ -91,6 +111,7 @@ async function seed () {
   const users = await seedUsers()
   const fandoms = await seedFandoms()
   const characters = await seedCharacters()
+  const pairings = await seedPairings(characters)
   const tags = await seedTags()
   const audioFiles = await seedAudios()
   const podfics = await seedPodfics()
@@ -114,6 +135,11 @@ async function seed () {
     await podfic.addFandoms([fandoms[0], fandoms[2]])
     await podfic.addAudio(audioFiles[i])
     await podfic.addUser(audioFiles[i].userId)
+    const pairingNum = Math.floor(Math.random() * pairings.length)
+    await podfic.addPairing(pairings[pairingNum])
+    const charsInPodfic = await pairings[pairingNum].getCharacters()
+    await podfic.addCharacters(charsInPodfic)
+
   })
   await podfics[1].addTag(tags[1])
   await podfics[1].addTag(tags[2])
@@ -126,10 +152,13 @@ async function seed () {
 
   await podfics[4].addFandoms(fandoms[5])
 
+  await seedPairings(characters)
+
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${fandoms.length} fandoms`)
   console.log(`seeded ${tags.length} tags`)
   console.log(`seeded ${characters.length} characters`)
+  console.log(`seeded ${pairings.length} pairings`)
   console.log(`seeded ${audioFiles.length} audio files (urls are totes fake though so nothing will play)`)
   console.log(`seeded ${podfics.length} podfics`)
   console.log(`seeded successfully`)
