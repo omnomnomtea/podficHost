@@ -27,7 +27,16 @@ const Podfic = db.define('podfic', {
   textUrl: {
     type: Sequelize.STRING,
   },
+  hits: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0,
+  },
 })
+
+Podfic.prototype.incrementHits = function() {
+  this.hits++
+  return this.save()
+}
 
 const sanitizeDescriptionHtml = (podfic) => {
   podfic.description = sanitizeHtml(podfic.description)
