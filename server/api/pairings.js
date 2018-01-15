@@ -9,16 +9,12 @@ router.get('/', (req, res, next) => {
 })
 
 
-router.get('/top/:number', (req, res, next) => {
-  const numberToFind = Number(req.params.number)
-  Podfic.findAll({
-    where: {
-
-    },
-  })
-    .then(pairings => res.json(pairings))
-    .catch(next)
-})
+// router.get('/top/:number/byHits', (req, res, next) => {
+//   const numberToFind = Number(req.params.number)
+//   Pairings.findAll()
+//   .then(pairings => {
+//   })
+// })
 
 
 router.get('/:id/podfics', (req, res, next) => {
