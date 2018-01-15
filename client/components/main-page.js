@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { SinglePodfic, SearchBox } from './index'
-import { fetchRecentPodfics, clearPodfics } from '../store'
+import { fetchRecentPodfics, clearPodfics, fetchTopPairings } from '../store'
 
 class MainPage extends React.Component {
   constructor() {
@@ -13,7 +13,7 @@ class MainPage extends React.Component {
   }
 
   loadOnce() {
-    if (!this.state.loaded) this.props.loadPodfics()
+    if (!this.state.loaded) this.props.load()
     this.setState({ loaded: true })
   }
 
@@ -21,7 +21,7 @@ class MainPage extends React.Component {
     this.loadOnce()
   }
   componentWillUnmount() {
-    this.props.clearPodfics()
+    this.props.clear()
   }
 
   componentWillReceiveProps(newProps) {
@@ -61,12 +61,13 @@ const mapState = (state, ownProps) => {
 
 const mapDispatch = (dispatch, ownProps) => {
   return {
-    loadPodfics(numPerPage, pageNum) {
+    load(numPerPage, pageNum) {
       numPerPage = Number(numPerPage || ownProps.match.params.numPerPage || 20)
       pageNum = Number(pageNum || ownProps.match.params.pageNum || 1)
       dispatch(fetchRecentPodfics(numPerPage, (pageNum - 1) * numPerPage))
+
     },
-    clearPodfics: () => {dispatch(clearPodfics())}
+    clear: () => {dispatch(clearPodfics())}
   }
 }
 
