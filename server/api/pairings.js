@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Pairing} = require('../db/models')
+const {Pairing, Podfic, db} = require('../db/models')
 module.exports = router
 
 router.get('/', (req, res, next) => {
@@ -7,6 +7,19 @@ router.get('/', (req, res, next) => {
     .then(pairings => res.json(pairings))
     .catch(next)
 })
+
+
+router.get('/top/:number', (req, res, next) => {
+  const numberToFind = Number(req.params.number)
+  Podfic.findAll({
+    where: {
+
+    },
+  })
+    .then(pairings => res.json(pairings))
+    .catch(next)
+})
+
 
 router.get('/:id/podfics', (req, res, next) => {
   const id = Number(req.params.id)
