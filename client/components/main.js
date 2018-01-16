@@ -1,8 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {withRouter, Link} from 'react-router-dom'
-import {logout} from '../store'
+import { connect } from 'react-redux'
+import { withRouter, Link } from 'react-router-dom'
+import { logout } from '../store'
 
 /**
  * COMPONENT
@@ -11,12 +10,12 @@ import {logout} from '../store'
  *  rendered out by the component's `children`.
  */
 const Main = (props) => {
-  const {children, handleClick, isLoggedIn} = props
+  const { children, handleClick, isLoggedIn } = props
 
   return (
     <div className="container">
-    <nav>
-      <h1><Link to="/">Podfic Hosting Site</Link></h1>
+      <nav>
+        <h1><Link to="/">Podfic Hosting Site</Link></h1>
         {
           isLoggedIn
             ? <div className="nav-links">
@@ -31,7 +30,7 @@ const Main = (props) => {
             </div>
         }
       </nav>
-        {children}
+      {children}
     </div>
   )
 }
@@ -47,7 +46,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    handleClick () {
+    handleClick() {
       dispatch(logout())
     }
   }
@@ -56,12 +55,3 @@ const mapDispatch = (dispatch) => {
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Main))
-
-/**
- * PROP TYPES
- */
-Main.propTypes = {
-  children: PropTypes.object,
-  handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
-}
