@@ -95,7 +95,7 @@ const deleteNode = (nodeOrId, options) => {
     })
 }
 
-const deleteConnection = (connectionId, options) => {
+const deleteConnection = (connectionId) => {
   if (typeof connectionId !== 'number') connectionId = connectionId.identity.toString()
 
   const session = driver.session();
@@ -108,10 +108,36 @@ const deleteConnection = (connectionId, options) => {
   })
 }
 
+//properties: {name: 'Harry Potter', gender: 'm', etc}
+const setPropertiesOnNode = async (nodeOrId, properties) => {
+  if (typeof nodeOrId !== 'number') nodeOrId = nodeOrId.identity.toString()
+
+
+  let query = 'MATCH (n) WHERE ID(n) = $id, SET';
+  const propsToPassToNeo = {}
+
+  // build the query string
+  // and an object of values to pass along to the built-in sanitizer
+  properties.entries().forEach((keyValPair, i) => {
+    query += ` n.$key${i} = $val${i},`; //ex: `n.$key1 = $val1`
+    propsToPassToNeo[`key${i}`] = keyValPair[0];
+    propsToPassToNeo[`val${i}`] = keyValPair[1];
+  });
+
+  //slice off the last comma and add "RETURN"
+  if (query[query.length - 1] === ',') query = query.slice(0, query.length - 1);
+  query += ' RETURN n';
+
+  const session = driver.session();
+  const results = await session.run(query)
+  return results.records[0].get(0);
+
+}
 
 module.exports = {
   createNode,
   deleteNode,
+  setPropertiesOnNode,
   createConnection,
   deleteConnection,
 }
