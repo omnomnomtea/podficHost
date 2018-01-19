@@ -5,10 +5,14 @@ const bodyParser = require('body-parser')
 const compression = require('compression')
 const session = require('express-session')
 //const passport = require('passport')
-//const db = require('./db')
+
+if (process.env.NODE_ENV === 'development') require('../secrets')
+const db = require('./db')
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
+
+
 module.exports = app
 
 /**
