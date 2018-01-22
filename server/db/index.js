@@ -24,19 +24,18 @@ const allowedConnectionTypes = [
   'HAS_PAIRING',
 ];
 
-const createNode = async (type) => {
+const createNode = async (type, options = {}) => {
   if (!allowedNodeTypes.includes(type)) {
     throw new Error(`Disallowed node type: ${type}`);
   }
   const session = driver.session();
+  let query = `CREATE (newNode:${type}) RETURN newNode`;
+  if (options.properties) {
+    query = `CREATE (newNode:${type}) SET newNode=$properties RETURN newNode`
+  }
 
-  const results = await session.run(
-    `
-    CREATE
-    (newNode:${type})
-    RETURN newNode
-    `,
-    { name },
+  const results = await session.run(query,
+    { type, properties: options.properties },
   );
   // uses built-in getter to get the record in a nicer format
   return results.records[0].get(0);
@@ -64,7 +63,7 @@ const createConnection = async (nodeOrId1, type, nodeOrId2) => {
     (node1)-[newConnection:${type}]->(node2)
     RETURN newConnection;
     `,
-    {id1, id2},
+    { id1, id2 },
   );
   // uses built-in getter to get the record in a nicer format
   return results.records[0].get(0);
@@ -101,43 +100,39 @@ const deleteConnection = (connectionId) => {
   const session = driver.session();
   let query = `MATCH [n] WHERE ID[n]=${connectionId} DELETE n;`
   return session.run(query)
-  .then(() => true)
-  .catch((err) => {
-    console.error(err)
-    return false
-  })
+    .then(() => true)
+    .catch((err) => {
+      console.error(err)
+      return false
+    })
 }
 
-//properties: {name: 'Harry Potter', gender: 'm', etc}
-const setPropertiesOnNode = async (nodeOrId, properties) => {
-  if (typeof nodeOrId !== 'number') nodeOrId = nodeOrId.identity.toString()
+//options: {property: {name: 'Harry Potter'}}
+const setPropertyOnNode = async (nodeOrId, options) => {
+  if (typeof nodeOrId !== 'number') nodeOrId = nodeOrId.identity.toNumber()
+  const params = { id: nodeOrId };
+  if (!options.property) throw new Error ('You must specify a property to set');
 
 
-  let query = 'MATCH (n) WHERE ID(n) = $id, SET';
-  const propsToPassToNeo = {}
+}
 
-  // build the query string
-  // and an object of values to pass along to the built-in sanitizer
-  properties.entries().forEach((keyValPair, i) => {
-    query += ` n.$key${i} = $val${i},`; //ex: `n.$key1 = $val1`
-    propsToPassToNeo[`key${i}`] = keyValPair[0];
-    propsToPassToNeo[`val${i}`] = keyValPair[1];
-  });
+// properties: {name: 'Harry Potter', gender: 'm', etc}
+const setAllPropertiesOnNode = async (nodeOrId, properties) => {
 
-  //slice off the last comma and add "RETURN"
-  if (query[query.length - 1] === ',') query = query.slice(0, query.length - 1);
-  query += ' RETURN n';
+  if (typeof nodeOrId !== 'number') nodeOrId = nodeOrId.identity.toNumber()
+  const props = { id: nodeOrId, properties };
 
+  let query = 'MATCH (n) WHERE ID(n) = $id SET n=$properties RETURN n';
   const session = driver.session();
-  const results = await session.run(query)
-  return results.records[0].get(0);
-
+  const results = await session.run(query, props)
+  if (results.records[0]) return results.records[0].get(0);
 }
 
 module.exports = {
   createNode,
   deleteNode,
-  setPropertiesOnNode,
+  setPropertyOnNode,
+  setAllPropertiesOnNode,
   createConnection,
   deleteConnection,
 }
