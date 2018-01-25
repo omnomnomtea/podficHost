@@ -25,9 +25,6 @@ const allowedConnectionTypes = [
 ];
 
 const createNode = async (type, options = {}) => {
-  if (!allowedNodeTypes.includes(type)) {
-    throw new Error(`Disallowed node type: ${type}`);
-  }
   const session = driver.session();
   let query = `CREATE (newNode:${type}) RETURN newNode`;
   if (options.properties) {
@@ -42,9 +39,6 @@ const createNode = async (type, options = {}) => {
 };
 
 const createConnection = async (nodeOrId1, type, nodeOrId2) => {
-  if (!allowedConnectionTypes.includes(type)) {
-    throw new Error(`Disallowed connection type: ${type}`);
-  }
   let id1;
   let id2;
   // this will be used in string interpolation so having this num be
@@ -109,11 +103,21 @@ const deleteConnection = (connectionId) => {
 
 //options: {property: {name: 'Harry Potter'}}
 const setPropertyOnNode = async (nodeOrId, options) => {
-  if (typeof nodeOrId !== 'number') nodeOrId = nodeOrId.identity.toNumber()
+  if (typeof nodeOrId !== 'number') nodeOrId = nodeOrId.identity.toNumber();
   const params = { id: nodeOrId };
   if (!options.property) throw new Error ('You must specify a property to set');
+  const [key, value] = Object.entries(options.property)
+  params.propValue = value;
 
+  let query = `MATCH (n) WHERE ID(n)=$id set n.${key} = n.$propValue RETURN n;`
+  const session = driver.session();
 
+  return session.run(query, params)
+    .then(() => true)
+    .catch((err) => {
+      console.error(err)
+      return false
+    });
 }
 
 // properties: {name: 'Harry Potter', gender: 'm', etc}
