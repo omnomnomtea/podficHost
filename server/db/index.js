@@ -5,24 +5,7 @@ const user = process.env.databaseUser
 const password = process.env.databasePassword
 
 const driver = neo4j.driver(uri, neo4j.auth.basic(user, password));
-const allowedNodeTypes = [
-  'Fandom',
-  'Character',
-  'Tag',
-  'Pairing',
-  'Podfic',
-  'Pairing_Type',
-];
-const allowedConnectionTypes = [
-  'IS_SUBFANDOM_OF',
-  'IS_CHARACTER_FROM',
-  'IS_PART_OF_FANDOM',
-  'CONTAINS_PAIRING_MEMBER',
-  'PAIRING_OF_TYPE',
-  'HAS_CHARACTER',
-  'HAS_TAG',
-  'HAS_PAIRING',
-];
+
 
 const createNode = async (type, options = {}) => {
   const session = driver.session();
